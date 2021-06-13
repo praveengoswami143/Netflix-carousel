@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Netflix Carousel</title>
+</head>
+
+<body>
+    <div class="main">
+        <div id="slider"></div>
+    </div>
+
+    <script>
+        const slider = document.getElementById("slider");
+
+        fetch("https://jsonplaceholder.typicode.com/photos?_limit=20").then((data) => {
+            // console.log(data.json());
+            return data.json();
+        })
+            .then((jsondata) => {
+                //console.log(jsondata[0].url);
+                //now using map method we will get all url
+                jsondata.map((val) => {
+                    console.log(val.url);
+                    key = val.id;
+                    let img = document.createElement("img");
+                    //now we will call 2nd api for images
+                    img.src = `https://picsum.photos/200/300?random=${key}`;
+                    slider.appendChild(img);
+                })
+            });
+    </script>
+</body>
+
+</html>
